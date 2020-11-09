@@ -13,6 +13,8 @@
 		E69EB0C92558F9DF0068D71A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E69EB0C82558F9DF0068D71A /* Assets.xcassets */; };
 		E69EB0CC2558F9DF0068D71A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E69EB0CB2558F9DF0068D71A /* Preview Assets.xcassets */; };
 		E69EB0CF2558F9DF0068D71A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E69EB0CD2558F9DF0068D71A /* LaunchScreen.storyboard */; };
+		E69EB0D72558FCF20068D71A /* TransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69EB0D62558FCF20068D71A /* TransactionView.swift */; };
+		E69EB0D92558FEA10068D71A /* InformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69EB0D82558FEA10068D71A /* InformationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		E69EB0CB2558F9DF0068D71A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E69EB0CE2558F9DF0068D71A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E69EB0D02558F9DF0068D71A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E69EB0D62558FCF20068D71A /* TransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionView.swift; sourceTree = "<group>"; };
+		E69EB0D82558FEA10068D71A /* InformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +44,7 @@
 		E69EB0B62558F9DA0068D71A = {
 			isa = PBXGroup;
 			children = (
+				E69EB0D62558FCF20068D71A /* TransactionView.swift */,
 				E69EB0C12558F9DA0068D71A /* RSA-Transaction */,
 				E69EB0C02558F9DA0068D71A /* Products */,
 			);
@@ -59,6 +64,7 @@
 				E69EB0C22558F9DA0068D71A /* AppDelegate.swift */,
 				E69EB0C42558F9DA0068D71A /* SceneDelegate.swift */,
 				E69EB0C62558F9DA0068D71A /* ContentView.swift */,
+				E69EB0D82558FEA10068D71A /* InformationView.swift */,
 				E69EB0C82558F9DF0068D71A /* Assets.xcassets */,
 				E69EB0CD2558F9DF0068D71A /* LaunchScreen.storyboard */,
 				E69EB0D02558F9DF0068D71A /* Info.plist */,
@@ -146,7 +152,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E69EB0D92558FEA10068D71A /* InformationView.swift in Sources */,
 				E69EB0C32558F9DA0068D71A /* AppDelegate.swift in Sources */,
+				E69EB0D72558FCF20068D71A /* TransactionView.swift in Sources */,
 				E69EB0C52558F9DA0068D71A /* SceneDelegate.swift in Sources */,
 				E69EB0C72558F9DA0068D71A /* ContentView.swift in Sources */,
 			);
