@@ -24,7 +24,7 @@ struct ContentView: View {
                     }
                 }
                 .tag(0)
-            
+
             InformationView()
                 .tabItem {
                     VStack {
@@ -35,6 +35,8 @@ struct ContentView: View {
                 .tag(1)
         }
     }
+    
+    
 }
 
 struct ContentView_Previews: PreviewProvider {

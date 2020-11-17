@@ -18,13 +18,14 @@ struct InformationView: View {
                     HStack {
                         Text("Private Key")
                         Spacer()
-                        Text("Generar llave")
+                        Text(" n = \(UserDefaults.standard.integer(forKey: "n")) & e = \(UserDefaults.standard.integer(forKey: "e"))")
                     }
                     
                     HStack {
                         Text("Public Key")
                         Spacer()
-                        Text("Generar llave")
+                        Text(" n = \(UserDefaults.standard.integer(forKey: "n")) & d = \(UserDefaults.standard.integer(forKey: "d"))")
+                        //Text("\(UserDefaults.standard.integer(forKey: "public_key"))")
                     }
                 }
                 
