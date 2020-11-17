@@ -45,8 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let n = p*q
         let phi = (p-1) * (q-1)
         
-        let e = 3 //Used on private key
-        let d = 2011 //Used on public Key
+        let e = getE(phi: phi) //Used on public key
+        let d = getD(e: e, phi: phi)//Used on public Key
         
         //var private_key = 5
         //var public_key = 7
@@ -54,7 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("el valor q es ", q)
         print("el valor n es ", n)
         print("EL valor de phi es:", phi)
-        print( "El valor de e es ", getE(phi: phi))
+        print( "El valor de e es ", e)
+        print("El valor de d es:", d)
         
         stored.set(n, forKey: "n")
         stored.setValue(e, forKey: "e")
@@ -112,12 +113,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func getE( phi: Int) -> Int {
+    func getE(phi: Int) -> Int {
         
         var e = 2
         
         while e < phi-1{
-            var res = gcd(a: e, b: phi)
+            let res = gcd(a: e, b: phi)
             
             if (res == 1) {
                 return e
@@ -125,6 +126,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             e+=1
         }
         return -1
+    }
+    
+    func getD (e:Int, phi: Int) -> Int {
+        
+        var d = 2
+        
+        while ( e*d % phi != 1){
+            d+=1
+        }
+        return d
+        
     }
 
 
