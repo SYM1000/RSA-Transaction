@@ -35,38 +35,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
+    // Get all values needed to generate private and public keys
     func getKeys(){
         let stored = UserDefaults.standard
         
-        let primes = randomPrimeArray(len: 100)
+        let primes = randomPrimeArray(len: 100) // Get all the prime numbers from 0 to a valur(len)
         
         let p = primes[Int.random(in: 0..<primes.count)]
         let q = primes[Int.random(in: 0..<primes.count)]
         let n = p*q
         let phi = (p-1) * (q-1)
-        
         let e = getE(phi: phi) //Used on public key
         let d = getD(e: e, phi: phi)//Used on public Key
         
-        //var private_key = 5
-        //var public_key = 7
-        print("el valor p es ", p)
-        print("el valor q es ", q)
-        print("el valor n es ", n)
-        print("EL valor de phi es:", phi)
-        print( "El valor de e es ", e)
-        print("El valor de d es:", d)
+//        print("el valor p es ", p)
+//        print("el valor q es ", q)
+//        print("el valor n es ", n)
+//        print("EL valor de phi es:", phi)
+//        print( "El valor de e es ", e)
+//        print("El valor de d es:", d)
         
         stored.set(n, forKey: "n")
         stored.setValue(e, forKey: "e")
         stored.set(d, forKey: "d")
         
-        //stored.setValue(public_key, forKey: "public_key")
-        
         print("LLaves generadas")
            
        }
-    
     
     // Check is a number is prime
     func isPrime(num: Int) -> Bool {
@@ -99,6 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return results
     }
     
+    // Get the Greatest Common Divison of two numbers
     func gcd(a:Int, b:Int) -> Int {
         if a == b {
             return a
@@ -113,6 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    // Get the vale e
     func getE(phi: Int) -> Int {
         
         var e = 2
@@ -128,6 +125,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return -1
     }
     
+    // Get the value D
     func getD (e:Int, phi: Int) -> Int {
         
         var d = 2
