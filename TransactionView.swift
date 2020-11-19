@@ -14,6 +14,7 @@ struct TransactionView: View {
     @State var message: String = ""
     @State var cipherText: String = ""
     @State var showingQRCode = false
+    @State var scanningQRCode = false
     
     var body: some View {
         
@@ -57,6 +58,26 @@ struct TransactionView: View {
                     ShowCodeView(cipherText: self.$cipherText)
                 }
                 
+                
+                Button(action: {
+                    print("Desifraando")
+                    self.scanningQRCode.toggle()
+                    
+                    
+                }){
+                    HStack {
+                        Text("Decipher a Code")
+                            .fontWeight(.semibold)
+                            .font(.headline)
+                    }
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(Color.green)
+                    .cornerRadius(40)
+                }.padding(.top)
+                .sheet(isPresented: $scanningQRCode) {
+                    ScanCodeView()
+                }
                 
                     
                 
@@ -222,6 +243,15 @@ struct ShowCodeView: View {
                 Spacer()
             }
             .navigationBarTitle("QR Code")
+        }
+    }
+}
+
+// View used to scanns a qrcode
+struct ScanCodeView: View {
+    var body: some View {
+        CodeScannerView(codeTypes: [.qr]) { result in
+            // do nothing
         }
     }
 }

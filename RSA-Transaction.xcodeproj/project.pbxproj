@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E663CD3A256658D7004FB5D2 /* CodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E663CD39256658D7004FB5D2 /* CodeScannerView.swift */; };
 		E69EB0C32558F9DA0068D71A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69EB0C22558F9DA0068D71A /* AppDelegate.swift */; };
 		E69EB0C52558F9DA0068D71A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69EB0C42558F9DA0068D71A /* SceneDelegate.swift */; };
 		E69EB0C72558F9DA0068D71A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69EB0C62558F9DA0068D71A /* ContentView.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E663CD39256658D7004FB5D2 /* CodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeScannerView.swift; sourceTree = "<group>"; };
 		E69EB0BF2558F9DA0068D71A /* RSA-Transaction.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RSA-Transaction.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E69EB0C22558F9DA0068D71A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E69EB0C42558F9DA0068D71A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +47,7 @@
 			isa = PBXGroup;
 			children = (
 				E69EB0D62558FCF20068D71A /* TransactionView.swift */,
+				E663CD39256658D7004FB5D2 /* CodeScannerView.swift */,
 				E69EB0C12558F9DA0068D71A /* RSA-Transaction */,
 				E69EB0C02558F9DA0068D71A /* Products */,
 			);
@@ -156,6 +159,7 @@
 				E69EB0C32558F9DA0068D71A /* AppDelegate.swift in Sources */,
 				E69EB0D72558FCF20068D71A /* TransactionView.swift in Sources */,
 				E69EB0C52558F9DA0068D71A /* SceneDelegate.swift in Sources */,
+				E663CD3A256658D7004FB5D2 /* CodeScannerView.swift in Sources */,
 				E69EB0C72558F9DA0068D71A /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,6 +301,7 @@
 				DEVELOPMENT_TEAM = ZNB3TG4R9B;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "RSA-Transaction/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -317,6 +322,7 @@
 				DEVELOPMENT_TEAM = ZNB3TG4R9B;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "RSA-Transaction/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
