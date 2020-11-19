@@ -249,10 +249,44 @@ struct ShowCodeView: View {
 
 // View used to scanns a qrcode
 struct ScanCodeView: View {
+    @State var isPresentingScanner = false
+    @State var scannedCode: String?
+    
     var body: some View {
-        CodeScannerView(codeTypes: [.qr]) { result in
-            // do nothing
+        CodeScannerView(codeTypes: [.qr], simulatedData: "Santiago Yeomans") { result in
+            switch result {
+            case .success(let code):
+                print("Found code: \(code)")
+                self.scannedCode = code
+                self.isPresentingScanner.toggle()
+                //desencriptar el mensaje y mostarlo al usuario
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         }
+        .sheet(isPresented: $isPresentingScanner) {
+            self.scannerSheet
+        }
+    }
+    
+    var scannerSheet : some View {
+        
+//        CodeScannerView(
+//            codeTypes: [.qr],
+//            completion: { result in
+//                if case let .success(code) = result {
+//                    self.scannedCode = code
+//                    self.isPresentingScanner = false
+//                }
+//            }
+//        )
+        NavigationView{
+            Text("El codigo es \(self.scannedCode!)")
+                
+            .navigationBarTitle("Code Scanned")
+        }
+        
+        
     }
 }
 
