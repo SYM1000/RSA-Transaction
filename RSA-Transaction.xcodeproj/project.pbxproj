@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E6487A092569AE3A00E9A233 /* BigNumber in Frameworks */ = {isa = PBXBuildFile; productRef = E6487A082569AE3A00E9A233 /* BigNumber */; };
 		E663CD3A256658D7004FB5D2 /* CodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E663CD39256658D7004FB5D2 /* CodeScannerView.swift */; };
 		E69EB0C32558F9DA0068D71A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69EB0C22558F9DA0068D71A /* AppDelegate.swift */; };
 		E69EB0C52558F9DA0068D71A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69EB0C42558F9DA0068D71A /* SceneDelegate.swift */; };
@@ -37,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6487A092569AE3A00E9A233 /* BigNumber in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,6 +102,9 @@
 			dependencies = (
 			);
 			name = "RSA-Transaction";
+			packageProductDependencies = (
+				E6487A082569AE3A00E9A233 /* BigNumber */,
+			);
 			productName = "RSA-Transaction";
 			productReference = E69EB0BF2558F9DA0068D71A /* RSA-Transaction.app */;
 			productType = "com.apple.product-type.application";
@@ -128,6 +133,9 @@
 				Base,
 			);
 			mainGroup = E69EB0B62558F9DA0068D71A;
+			packageReferences = (
+				E6487A072569AE3A00E9A233 /* XCRemoteSwiftPackageReference "Swift-BigInt" */,
+			);
 			productRefGroup = E69EB0C02558F9DA0068D71A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -356,6 +364,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E6487A072569AE3A00E9A233 /* XCRemoteSwiftPackageReference "Swift-BigInt" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mkrd/Swift-BigInt";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E6487A082569AE3A00E9A233 /* BigNumber */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E6487A072569AE3A00E9A233 /* XCRemoteSwiftPackageReference "Swift-BigInt" */;
+			productName = BigNumber;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E69EB0B72558F9DA0068D71A /* Project object */;
 }

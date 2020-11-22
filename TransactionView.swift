@@ -9,6 +9,7 @@
 import Foundation
 import SwiftUI
 import CoreImage.CIFilterBuiltins
+import BigNumber
 
 struct TransactionView: View {
     @State var message: String = ""
@@ -60,7 +61,6 @@ struct TransactionView: View {
                 
                 
                 Button(action: {
-                    print("Desifraando")
                     self.scanningQRCode.toggle()
                     
                     
@@ -83,20 +83,16 @@ struct TransactionView: View {
                 
             }.padding()
             
-//            VStack{
-//                Text("Your QR code")
-//                QRCodeView(url: "www.santiagoyeomans.com")
-//
-//            }
             .navigationBarTitle("Tansaction")
         }
         
     }
     
-    // Convert a plain text into numbers
+    // Convert a plain text into numbers ASCII???
     func convertMessageToNumbers(message: String) -> String{
         //Create dictionary with value of letters
-        let text = message.lowercased()
+        let text = message
+        //let text = message
         
         let dictionary = [
             "a" : "1",
@@ -128,35 +124,68 @@ struct TransactionView: View {
         ]
         var numbers = ""
         
-        for letter in text {
-            if (letter == " "){
-                numbers += " "
+        
+        
+//        for letter in text {
+//            if (letter == " "){
+//                numbers += " "
+//                continue
+//            }
+//            numbers += dictionary[String(letter)]!
+//        }
+        
+        let palabras = text.components(separatedBy: " ")
+        let last = palabras.count-1
+        
+        for palabra in palabras{
+            let palabraEnAscii = palabra.asciiValues
+            let last2 = palabraEnAscii.count-1
+            for x in palabraEnAscii{
+                numbers += String(x)
+                if(x == palabraEnAscii[last2]){
+                    continue
+                }
+                numbers += "."
+            }
+            
+            if(palabra == palabras[last]){
                 continue
             }
-            numbers += dictionary[String(letter)]!
+            numbers += " "
         }
-    
+        
+        
+        //print("El numero final en ascii es", numbers )
         return numbers
     }
     
     func cypherNumber(text: String) -> String {
         let words = text.components(separatedBy: " ")
-        var numbers = [Int]()
+        var numbers = [BInt]()
         let e = UserDefaults.standard.integer(forKey: "e")
         let n = UserDefaults.standard.integer(forKey: "n")
+        let d = UserDefaults.standard.integer(forKey: "d")
         
         //let p = powerMod(base: 715, exponent: 7, modulus: 2867)
         //print("valor es ", p)
         
+//        numbers.append(BInt(d))
+//        numbers.append(BInt(n))
         
         for word in words{
             //var value = Int(pow( Double(Int(word)!) , Double(e))) % n
-            //print(word)
-            let value = powerMod(base: Int(word)!, exponent: e, modulus: n)
-            numbers.append(value)
+            //print("Numeros son", word)
+            let valores = word.components(separatedBy: ".")
+            for valor in valores {
+                let value = TransactionView.powerMod(base: BInt(valor)!, exponent: BInt(e), modulus: BInt(n))
+                numbers.append(value)
+            }
+            numbers.append(-1)
+            
+            //print("Values es", value)
         }
         
-        
+        //print("el texto cifrado es :", numbers)
         //print("el texto cifrado es :", convertToString(numbes: numbers))
         
        return convertToString(numbes: numbers)
@@ -164,36 +193,56 @@ struct TransactionView: View {
     }
     
     // Exponenciacion rapida
-    func powerMod(base: Int, exponent: Int, modulus: Int) -> Int {
+   static func powerMod(base: BInt, exponent: BInt, modulus: BInt) -> BInt {
         guard base > 0 && exponent >= 0 && modulus > 0
             else { return -1 }
 
         var base = base
         var exponent = exponent
-        var result = 1
+        var result = BInt(1)
+    
+        var z = 6.5
+        z.round(.down)
 
         while exponent > 0 {
             if exponent % 2 == 1 {
-                result = (result * base) % modulus
+                result = BInt((result * base) % modulus)
             }
             base = (base * base) % modulus
             exponent = exponent / 2
+            var y = Double(exponent)
+            exponent = BInt(y)
+        
         }
 
-        return result
+        return BInt(result)
     }
     
     // Convert array of numbers to string: separated by ","
-    func convertToString(numbes: [Int]) -> String{
+    func convertToString(numbes: [BInt]) -> String{
         var texto = ""
         
+        let n = UserDefaults.standard.integer(forKey: "n")
+        let d = UserDefaults.standard.integer(forKey: "d")
+
+        texto += String(BInt(d))
+        texto += ","
+        texto += String(BInt(n))
+        texto += ","
+        
         for x in numbes{
+            if(x == BInt(-1)){
+                texto = String(texto.dropLast())
+                texto += ","
+                continue
+            }
             texto += String(x)
             if(x != numbes[numbes.count-1]){
-                texto += ","
+                texto += "."
             }
         }
-        
+        texto = String(texto.dropLast())
+        //print("El texto convertido es", texto)
         return texto
     }
     
@@ -251,6 +300,7 @@ struct ShowCodeView: View {
 struct ScanCodeView: View {
     @State var isPresentingScanner = false
     @State var scannedCode: String?
+    @State var mensaje = "gg"
     
     var body: some View {
         CodeScannerView(codeTypes: [.qr], simulatedData: "Santiago Yeomans") { result in
@@ -258,8 +308,10 @@ struct ScanCodeView: View {
             case .success(let code):
                 print("Found code: \(code)")
                 self.scannedCode = code
+                self.mensaje = desencriptar(code: code)
+                UserDefaults.standard.setValue(self.mensaje, forKey: "Message")
+                
                 self.isPresentingScanner.toggle()
-                //desencriptar el mensaje y mostarlo al usuario
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -272,7 +324,7 @@ struct ScanCodeView: View {
     var scannerSheet : some View {
         
 //        CodeScannerView(
-//            codeTypes: [.qr],
+//            codeTypes: [],
 //            completion: { result in
 //                if case let .success(code) = result {
 //                    self.scannedCode = code
@@ -280,18 +332,50 @@ struct ScanCodeView: View {
 //                }
 //            }
 //        )
-        NavigationView{
-            Text("El codigo es \(self.scannedCode!)")
-                
-            .navigationBarTitle("Code Scanned")
+        NavigationView(){
+            
+            Text("Tu mensaje es: \(UserDefaults.standard.string(forKey: "Message") ?? "Error")").padding()
+
+            .navigationBarTitle("Encrypted Message")
         }
         
         
     }
+    
+    func desencriptar(code : String) -> String{
+        var message = ""
+        var palabras = code.components(separatedBy: ",")
+        
+        var d = palabras[0]
+        var n = palabras[1]
+        
+        palabras.remove(at: 0)
+        palabras.remove(at: 0)
+        
+        for palabra in palabras {
+            var letras = palabra.components(separatedBy: ".")
+            for letra in letras{
+                var value = TransactionView.powerMod(base: BInt(letra)!, exponent: BInt(d)!, modulus: BInt(n)!)
+                let s = String(UnicodeScalar(UInt32(value))!)
+                message += s
+            }
+            message += " "
+        }
+
+        return message
+        
+    }
+    
+    
+
 }
 
 struct TransactionView_Previews: PreviewProvider {
     static var previews: some View {
         TransactionView()
     }
+}
+
+extension StringProtocol {
+    var asciiValues: [UInt8] { compactMap(\.asciiValue) }
 }
