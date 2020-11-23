@@ -356,7 +356,7 @@ struct ScanCodeView: View {
             var letras = palabra.components(separatedBy: ".")
             for letra in letras{
                 var value = TransactionView.powerMod(base: BInt(letra)!, exponent: BInt(d)!, modulus: BInt(n)!)
-                let s = String(UnicodeScalar(UInt32(value))!)
+                let s = String(UnicodeScalar(UInt8(value)))
                 message += s
             }
             message += " "

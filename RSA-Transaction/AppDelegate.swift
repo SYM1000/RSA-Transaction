@@ -44,13 +44,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var p = primes[Int.random(in: 0..<primes.count)]
         var q = primes[Int.random(in: 0..<primes.count)]
-        p = 47
-        q = 61
+        //p = 47
+        //q = 61
         var n = p*q
         var phi = (p-1) * (q-1)
         var e = getE(phi: phi) //Used on public key
+        var d = getD(e: e, phi: phi)
         
-        var d = 0
         //var d = getD(e: e, phi: phi)//Used on public Key
         //print("Valor de D:", d)
         
@@ -59,39 +59,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        print("el valor n es ", n)
 //        print("EL valor de phi es:", phi)
 //        print( "El valor de e es ", e)
-//        print("El valor de d es:", d)
-        
-//        p = 47
-//        q = 61
-//        n = 2867
-//        phi = (p-1) * (q-1)
-//        e = getE(phi: phi)
-        //d = (1 + (2*phi))/e;
-        //print("Valor de D:", d)
-        //d = TransactionView.powerMod(base: e, exponent: -1, modulus: phi)
-        //print("Valor de D:", d)
-        
-        var i = 0
-        while (i<=10) {
-            var x = 1+(i*phi)
-            if(x%e == 0){ //d is for private key exponent
-                d = x/e
-                break
-            }
-            i+=1
-        }
-        
-        print("Valor de D:", d)
-        
-        
-        
-        
-        
+          //print("Valor de d:", d)
+
         stored.set(n, forKey: "n")
         stored.setValue(e, forKey: "e")
         stored.set(d, forKey: "d")
-        
-        print("LLaves generadas")
            
        }
     
@@ -161,12 +133,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Get the value D
     func getD (e:Int, phi: Int) -> Int {
         
-        var d = 2
+        var d = 0
+        var i = 0
         
-        while ( TransactionView.powerMod(base: BInt(e), exponent: BInt(d), modulus: BInt(phi)) !=  BInt(1)){
-            d+=1
+        while (i<=10) {
+            var x = 1+(i*phi)
+            if(x%e == 0){ //d is for private key exponent
+                d = x/e
+                break
+            }
+            i+=1
         }
-        //print("Comprobacion del valor de D :", TransactionView.powerMod(base: e, exponent: d, modulus: phi))
         return d
     }
 
