@@ -66,7 +66,7 @@ struct TransactionView: View {
                     
                 }){
                     HStack {
-                        Text("Decipher a Code")
+                        Text("Scan a Code")
                             .fontWeight(.semibold)
                             .font(.headline)
                     }
@@ -88,51 +88,11 @@ struct TransactionView: View {
         
     }
     
-    // Convert a plain text into numbers ASCII???
+    // Convert a plain text into ASCII
     func convertMessageToNumbers(message: String) -> String{
         //Create dictionary with value of letters
         let text = message
-        //let text = message
-        
-        let dictionary = [
-            "a" : "1",
-            "b" : "2",
-            "c" : "3",
-            "d" : "4",
-            "e" : "5",
-            "f" : "6",
-            "g" : "7",
-            "h" : "8",
-            "i" : "9",
-            "j" : "10",
-            "k" : "11",
-            "l" : "12",
-            "m" : "13",
-            "n" : "14",
-            "o" : "15",
-            "p" : "16",
-            "q" : "17",
-            "r" : "18",
-            "s" : "19",
-            "t" : "20",
-            "u" : "21",
-            "v" : "22",
-            "w" : "23",
-            "x" : "24",
-            "y" : "25",
-            "z" : "26",
-        ]
         var numbers = ""
-        
-        
-        
-//        for letter in text {
-//            if (letter == " "){
-//                numbers += " "
-//                continue
-//            }
-//            numbers += dictionary[String(letter)]!
-//        }
         
         let palabras = text.components(separatedBy: " ")
         let last = palabras.count-1
@@ -164,17 +124,9 @@ struct TransactionView: View {
         var numbers = [BInt]()
         let e = UserDefaults.standard.integer(forKey: "e")
         let n = UserDefaults.standard.integer(forKey: "n")
-        let d = UserDefaults.standard.integer(forKey: "d")
-        
-        //let p = powerMod(base: 715, exponent: 7, modulus: 2867)
-        //print("valor es ", p)
-        
-//        numbers.append(BInt(d))
-//        numbers.append(BInt(n))
+        _ = UserDefaults.standard.integer(forKey: "d")
         
         for word in words{
-            //var value = Int(pow( Double(Int(word)!) , Double(e))) % n
-            //print("Numeros son", word)
             let valores = word.components(separatedBy: ".")
             for valor in valores {
                 let value = TransactionView.powerMod(base: BInt(valor)!, exponent: BInt(e), modulus: BInt(n))
@@ -210,7 +162,7 @@ struct TransactionView: View {
             }
             base = (base * base) % modulus
             exponent = exponent / 2
-            var y = Double(exponent)
+            let y = Double(exponent)
             exponent = BInt(y)
         
         }
@@ -245,7 +197,6 @@ struct TransactionView: View {
         //print("El texto convertido es", texto)
         return texto
     }
-    
 }
 
 
@@ -322,19 +273,9 @@ struct ScanCodeView: View {
     }
     
     var scannerSheet : some View {
-        
-//        CodeScannerView(
-//            codeTypes: [],
-//            completion: { result in
-//                if case let .success(code) = result {
-//                    self.scannedCode = code
-//                    self.isPresentingScanner = false
-//                }
-//            }
-//        )
         NavigationView(){
             
-            Text("Tu mensaje es: \(UserDefaults.standard.string(forKey: "Message") ?? "Error")").padding()
+            Text("Tu mensaje es: \(UserDefaults.standard.string(forKey: "Message") ?? "Error")").font(.headline).padding()
 
             .navigationBarTitle("Encrypted Message")
         }
@@ -342,20 +283,21 @@ struct ScanCodeView: View {
         
     }
     
+    //Desencripar la informacion del codido QR
     func desencriptar(code : String) -> String{
         var message = ""
         var palabras = code.components(separatedBy: ",")
         
-        var d = palabras[0]
-        var n = palabras[1]
+        let d = palabras[0]
+        let n = palabras[1]
         
         palabras.remove(at: 0)
         palabras.remove(at: 0)
         
         for palabra in palabras {
-            var letras = palabra.components(separatedBy: ".")
+            let letras = palabra.components(separatedBy: ".")
             for letra in letras{
-                var value = TransactionView.powerMod(base: BInt(letra)!, exponent: BInt(d)!, modulus: BInt(n)!)
+                let value = TransactionView.powerMod(base: BInt(letra)!, exponent: BInt(d)!, modulus: BInt(n)!)
                 let s = String(UnicodeScalar(UInt8(value)))
                 message += s
             }

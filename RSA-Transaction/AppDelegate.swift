@@ -42,17 +42,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let primes = randomPrimeArray(len: 100) // Get all the prime numbers from 0 to a valur(len)
         
-        var p = primes[Int.random(in: 0..<primes.count)]
-        var q = primes[Int.random(in: 0..<primes.count)]
+        let p = primes[Int.random(in: 0..<primes.count)]
+        let q = primes[Int.random(in: 0..<primes.count)]
         //p = 47
         //q = 61
-        var n = p*q
-        var phi = (p-1) * (q-1)
-        var e = getE(phi: phi) //Used on public key
-        var d = getD(e: e, phi: phi)
-        
-        //var d = getD(e: e, phi: phi)//Used on public Key
-        //print("Valor de D:", d)
+        let n = p*q
+        let phi = (p-1) * (q-1)
+        let e = getE(phi: phi) //Used on public key
+        let d = getD(e: e, phi: phi)
         
 //        print("el valor p es ", p)
 //        print("el valor q es ", q)
@@ -122,7 +119,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let res = gcd(a: e, b: phi)
             
             if (res == 1) {
-                print("Comprobacion del valor de E :", gcd(a: e, b: phi))
+                //print("Comprobacion del valor de E :", gcd(a: e, b: phi))
                 return e
             }
             e+=1
@@ -137,7 +134,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var i = 0
         
         while (i<=10) {
-            var x = 1+(i*phi)
+            let x = 1+(i*phi)
             if(x%e == 0){ //d is for private key exponent
                 d = x/e
                 break

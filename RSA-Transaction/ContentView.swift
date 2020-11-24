@@ -20,7 +20,7 @@ struct ContentView: View {
                 .tabItem {
                     VStack {
                         Image(systemName: "paperplane").font(.system(size: 23))
-                        Text("Transaction").font(.system(size: 23))
+                        Text("Message").font(.system(size: 23))
                     }
                 }
                 .tag(0)
@@ -29,7 +29,7 @@ struct ContentView: View {
                 .tabItem {
                     VStack {
                         Image(systemName: "info.circle").font(.system(size: 23))
-                        Text("Information").font(.system(size: 23))
+                        Text("Keys").font(.system(size: 23))
                     }
                 }
                 .tag(1)
